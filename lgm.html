@@ -1,0 +1,94 @@
+We build models to understand dependency, then predict and in some cases prescription(tough).
+Before building models,
+one needs to ask whether collected data is biased and validation, how clean is data(missing values).
+Subject Matter expertise, sometimes helps in including good features and inference.
+
+3 types of learning
+supervised - know what to predict. regression and classification.
+unsupervised - Cluster analysis, dimensionality reduction, feature selection.
+reinforcement learning - is concerned with the problem of finding suitable actions
+						 to take in a given situation in order to maximize a reward.
+						 Game playing, path planning.
+Supervised
+-----------
+Local models vs global models
+KNN - local models, doesn't perform well in high dimensions. As you need to fetch out samples from far distances.
+Linear regression - Global models. considers that there exist a single equation for whole data.
+                    may not be true. Polynomial models tend to overfit, so need to be cautious about bias vs variance tradeoff.
+					Have validation set, to avoid test set overfit.
+					Collect more training data, to avoid overfit if data collections easy(in general, its difficult).
+
+Function approximation
+----------------------
+Y = f(X) + e
+
+reducible errors - find more dependent variables(feature), linear to polynomial etc.
+irreducible errors - can't do anything.
+
+Statistical Learning Methods are divided into
+----------------------------------------------
+1) Parametric
+2) Non-Parametric
+
+Parametric Methods
+--------------------
+functional form is assumed and trained to fit best model.
+f(X) = ß0 + ß1X1 + ß2X2 + . . . + ßpXp.
+
+Viewed as a function over the p-dimensional input space,
+f(X) = transpose(X)B is linear,
+and the gradient f'(X) = B is a vector in input space
+that points in the steepest uphill direction.
+
+Reduced Sum of squares to optimise the fit.
+Derivation of normal equation below
+http://eli.thegreenplace.net/2015/the-normal-equation-and-matrix-calculus/
+
+Non-Parametric Methods
+-----------------------
+Non-parametric methods do not make explicit assumptions about the functional
+form of f. Instead they seek an estimate of f that gets as close to the
+data points as possible without being too rough or wiggly.
+
+major disadvantage: a very large number of observations(far more than parametric).
+
+Accuracy vs Interpretation
+---------------------------
+We might prefer a more restrictive model, If we are mainly interested in inference.
+
+There is no free lunch in statistics: no one method dominates all others over all
+possible data sets.
+
+Measuring Quality of Fit
+-------------------------
+MSE = 1/n sum over each sample i (yi - ˆ f(xi)) ** 2
+
+Degrees of freedom increases overfit train data. Use cross validation to select best model.
+
+Bias variance trade-off
+------------------------
+E(y - f(x))2 = Var(f(x)) + [Bias(f(x))]2 +Var(e).
+
+MSE = E[(y - f(x)) ^ 2]
+    = E[y - E[y0]]^2 + [E(y0 - f(x)] ^ 2
+	= Var(y0) + Bias(y0) ^ 2
+
+Good test model, low variance and low bias.
+
+Classification problems
+-----------------------
+E = 1/n sum (I(y /= yi)) ---> error rate
+
+I is indicator function.
+
+Bayes Classifier
+----------------
+P(Y=j|X=x0) conditional probability. > 0.5 assigns to class label.
+
+Bayes decision boundary P = 0.5.
+
+Bayes Error rate = 1 - E(max of j Pr(Y = j|X))
+
+K-Nearest Neighbour
+-------------------
+Assign class values based upon K nearest points to test sample, where points belonging to class j is maximum.
